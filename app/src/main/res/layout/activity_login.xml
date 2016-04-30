@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.emmasuzuki.easyform.EasyForm
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:submitButton="@+id/btnEnter">
+
+    <com.emmasuzuki.easyform.EasyFormEditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtLogin"
+        android:hint="@string/login"
+        android:inputType="text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        app:errorMessage="Поле не должно быть пустым!"
+        app:errorType="empty"
+        />
+    <com.emmasuzuki.easyform.EasyFormEditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtPassword"
+        android:hint="@string/password"
+        android:layout_below="@+id/edtLogin"
+        android:layout_centerHorizontal="true"
+        android:inputType="numberPassword"
+        app:errorMessage="Пароль не должен содержать меньше 8 цифр!"
+        app:regexPattern="[0-9]{8,}"/>
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@id/btnEnter"
+        android:layout_below="@id/edtPassword"
+        android:layout_centerInParent="true"
+        android:text="@string/enter"
+        android:textColor="#fff"
+        android:background="#46b746"/>
+
+</com.emmasuzuki.easyform.EasyForm>
