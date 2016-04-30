@@ -25,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
         mButtonEnter = (Button) findViewById(R.id.btnEnter);
         mEditTextLog = (EditText) findViewById(R.id.edtLogin);
         mEditTextPassword = (EditText) findViewById(R.id.edtPassword);
-        final String login = mEditTextLog.getText().toString();
         final Intent intent = new Intent(LoginActivity.this, AftorizationActivity.class);
 
         mSharedPreferences = getSharedPreferences(APP_SETTINGS, Context.MODE_PRIVATE);
@@ -35,16 +34,17 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtra(AftorizationActivity.EXTRA_LOG_NAME,
                             mSharedPreferences.getString(APP_SETTINGS_KEY,""));
             startActivity(intent);
-        }else {
+            return;
+        }
             mButtonEnter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    editor.putString(APP_SETTINGS_KEY, login);
-                    intent.putExtra(AftorizationActivity.EXTRA_LOG_NAME, login);
+                    editor.putString(APP_SETTINGS_KEY, mEditTextLog.getText().toString());
+                    editor.apply();
+                    intent.putExtra(AftorizationActivity.EXTRA_LOG_NAME, mEditTextLog.getText().toString());
                     startActivity(intent);
                 }
             });
-        }
     }
 
     public static String getAppSettings() {
@@ -53,5 +53,14 @@ public class LoginActivity extends AppCompatActivity {
 
     public static String getAppSettingsKey() {
         return APP_SETTINGS_KEY;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
