@@ -26,14 +26,24 @@ public class AftorizationActivity extends AppCompatActivity {
 
         mSharedPreferences = getSharedPreferences(LoginActivity.getAppSettings(), Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = mSharedPreferences.edit();
-
         mButtonClearAft = (Button) findViewById(R.id.btnClearAft);
         mButtonClearAft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.remove(LoginActivity.getAppSettingsKey());
+                editor.remove(LoginActivity.getAppSettingsKey()).apply();
+                Intent intent = new Intent(AftorizationActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 }
